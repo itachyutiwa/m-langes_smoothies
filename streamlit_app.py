@@ -5,7 +5,7 @@ import requests
 
 st.title(f":cup_with_straw: Smoothie Form :cup_with_straw: ")
 
-cnx=st.connection("snowflake")
+cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 
@@ -13,7 +13,7 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT
 name_on_order = st.text_input('Name on Smoothie:')
 st.text(f'The name on your smoothie will be : {name_on_order}')
 
-ingredients_list = st.multiselect("Choose the 5 fruits you wan", my_dataframe,max_selections=5)
+ingredients_list = st.multiselect("Choose the 5 fruits you wan", my_dataframe, max_selections=5)
 
 if ingredients_list:
     st.write(ingredients_list)
@@ -37,6 +37,6 @@ if ingredients_list:
             session.sql(my_insert_stmt).collect()
             st.success('Your Smoothie is ordered!', icon="✅")
 
-smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
-#st.text(smoothiefroot_response.json())
+# Correction de l'URL ici (sans les balises de liens markdown)
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")  
 sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
