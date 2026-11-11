@@ -1,11 +1,11 @@
 import streamlit as st
 import os
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col, when_matched
 
 st.title(f":cup_with_straw: Smoothie Form :cup_with_straw: ")
 
-session = get_active_session()
+cnx=st.connection("snowflake")
+session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 
 # Define the text input once here:
