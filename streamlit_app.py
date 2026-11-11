@@ -7,7 +7,8 @@ st.title(f":cup_with_straw: Smoothie Form :cup_with_straw: ")
 
 cnx = st.connection("snowflake")
 session = cnx.session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
+st.stop()
 
 # Define the text input once here:
 name_on_order = st.text_input('Name on Smoothie:')
